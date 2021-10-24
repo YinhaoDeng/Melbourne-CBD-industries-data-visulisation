@@ -8,7 +8,6 @@ Our target user is the State Government department who need to understand the de
 [Live Demo](http://iv-asst3.herokuapp.com)
 
 
-![screenshot](https://github.com/YinhaoDeng/Melbourne-CBD-industries-data-visulisation/blob/main/Melbourne%20Industry%20Visulisation%20Project%20screenshot.png)
 To get the best experience, we suggest to view the website on PC (screen size: 1920x1080)
 
 - Design, Development, Data & Modelling - Ziyi Zhang, Xuan Zhang, Jianeng Li, Yinhao Deng
