@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang='en' xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+  <!-- META -->
+  <meta charset='utf-8' />
+  <meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no' />
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- TITLE -->
+  <title>Melbourne</title>
+
+  <!-- STYLE SHEETS -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:300,400,600' rel='stylesheet'>
+  <link rel='stylesheet' href='style.css' type='text/css' />
+  <link rel='stylesheet' href='d3.slider.css' type='text/css' />
+
+  <!-- D3 -->
+  <script src='d3.min.js'></script>
+  <script src='d3.slider.js'></script>
+
+  <!-- MapBox -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
+
+  <!-- Echarts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id='header'>
+
+  <!-- HEADER/ABOUT-LINK -->
+  <div id='about-link'>
+    <span class='desktop'>About</span>
+  </div>
+
+  <!-- HEADER/LEGEND-MOBILE -->
+  <div id='legend-mobile'></div>
+
+  <!-- HEADER/MODES -->
+  <div id='modes'>
+
+    <div class='mode' id='mode-viz'>
+      <span class='desktop'>Visualization</span>
+      <span class='mobile'>Viz</span>
+    </div>
+
+
+  </div>
+
+  <!-- HEADER/TITLE -->
+  <div id='title'>
+    <span class='desktop'>Melbourne&nbsp;Industries&nbsp;Explorer</span>
+  </div>
+
+</div>
+
+<!-- ABOUT -->
+<div class='about' id='about'>
+
+  <!-- ABOUT/CLOSE -->
+  <div id = 'about-close'></div>
+
+  <!-- ABOUT/CONTENT -->
+  <div id='about-content'>
+
+    <!-- ABOUT/CONTENT/HEADER -->
+    <div id = 'about-header'>An explorer shows the occupation of 19 industries in all districts</div>
+
+    <!-- ABOUT/CONENT/TEXT -->
+    <div id = 'about-text'>
+      <p>An explorer shows the occupation of 19 industries in all districts
+        Our target user is the State Government department who need to understand the development of various industries in Melbourne from 2002 to 2019. 
+        The purpose of the project is to assist the government to visualize the historical business establishment data of the City of Melbourne, discovering 
+        the development patterns of 19 industries in various regions, and making decisions to promote each industry based on this.
+      </p>
+      
+
+      <!-- ABOUT/CONENT/TEXT/CREDITS -->
+      <div id='about-credits'>
+        <p>
+          <br/>Design, Development, Data & Modelling : Ziyi Zhang | Xuan Zhang | Jianeng Li | Yinhao Deng
+          <br/>Map engine - Mapbox GL JS</a>
+          <br/>Graphing engine - D3.js, ECharts Tableau
+          <br/>Github - <a href='https://github.com/jianengli/iv_project' target='_blank'>link</a >
+        </p >
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div>
+<!-- SIDE BAR -->
+<div id='sidebar'>
+
+  <!-- LEGEND -->
+  <div id='legend'>
+
+    <!-- LEGEND/CONTENT Do not change it-->
+    <div id='legend-content'>
+
+      <div class='line'>portion of this industry take part in this local area:</div>
+
+      <div class='line'>
+        <div class = 'av' id='pop_0'>&#9724;&#xFE0E;</div>
+        <div class='caption'>0%&nbsp;-&nbsp;1%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_1'>&#9724;&#xFE0E;</div>
+        <div class='caption'>1%&nbsp;-&nbsp;2%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_2'>&#9724;&#xFE0E;</div>
+        <div class='caption'>2%&nbsp;-&nbsp;4%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_4'>&#9724;&#xFE0E;</div>
+        <div class='caption'>4%&nbsp;-&nbsp;8%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_8'>&#9724;&#xFE0E;</div>
+        <div class='caption'>8%&nbsp;-&nbsp;16%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_16'>&#9724;&#xFE0E;</div>
+        <div class='caption'>16%&nbsp;-&nbsp;32%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_32'>&#9724;&#xFE0E;</div>
+        <div class='caption'>32%&nbsp;-&nbsp;64%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_64'>&#9724;&#xFE0E;</div>
+        <div class='caption'>64%&nbsp;-&nbsp;90%</div>
+      </div>
+      <div class='line'>
+        <div class = 'av' id='pop_90'>&#9724;&#xFE0E;</div>
+        <div class='caption'>more&nbsp;than&nbsp;90%</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEIGHBORHOOD FILTER -->
+  <div id='cbs' class='desktop'>
+
+    <!-- NEIGHBORHOOD/CONTENT There are 13 areas in total -->
+    <div id='cbs-content'>
+
+      <div class='line'>Visible&nbsp;Districts:</div>
+
+      <div class='line'>
+        <input type='checkbox' id='cb1' class='cbn' checked>
+        <span>&nbsp;Kensington</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb2' class='cbn' checked>
+        <span>&nbsp;Parkville</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb3' class='cbn' checked>
+        <span>&nbsp;North Melbourne</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb4' class='cbn' checked>
+        <span>&nbsp;West Melbourne (Residential)</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb5' class='cbn' checked>
+        <span>&nbsp;West Melbourne (Industrial)</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb6' class='cbn' checked>
+        <span>&nbsp;Port Melbourne</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb7' class='cbn' checked>
+        <span>&nbsp;Docklands</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb8' class='cbn' checked>
+        <span>&nbsp;Melbourne (CBD)</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb9' class='cbn' checked>
+        <span>&nbsp;Southbank</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb10' class='cbn' checked>
+        <span>&nbsp;South Yarra</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb11' class='cbn' checked>
+        <span>&nbsp;East Melbourne</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb12' class='cbn' checked>
+        <span>&nbsp;Carlton</span>
+      </div>
+      <div class='line'>
+        <input type='checkbox' id='cb13' class='cbn' checked>
+        <span>&nbsp;Melbourne (Remainder)</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+<!-- CONTROLS -->
+<div id = 'controls'>
+  <!--year slider -->>
+  <div id='slider-area-b'>
+    <div id='slider-b'></div>
+  </div>
+
+</div>
+
+<!-- MB Map -->
+<div class="image"></div>
+<h1 style="top: 500px; left:250px; position: absolute;display: block; margin-left: auto; margin-right: auto; font-size: 600%;">Melbourne Industries Explorer</h1>
+<h2 style="top: 700px; left:250px; position: absolute;display: block; margin-left: auto; margin-right: auto; font-size: 200%;">Design by: Ziyi Zhang  |  Xuan Zhang  | Jianeng Li  |  Yinhao Deng</h2>
+<h2 style="top: 800px; left:250px; position: absolute;display: block; margin-left: auto; margin-right: auto; font-size: 200%;">Oct 2021</h2>
+
+
+<nav id="menu"></nav>
+<div style="margin-left: 10%; margin-right: 10%;">
+  <div id="map" style="width: 80%;"></div>
+
+  <pre id="features"></pre>
+
+  <!-- JS-MANPOP -->
+  <script src='map.js' type="text/javascript"></script>
+  <!-- PART 2 -->
+  <div class='tableauPlaceholder' id='viz1635068703941' style='position: relative; margin-top: 5em;'>
+  <noscript>
+    <a href='#'>
+      <img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book1_16319580770430&#47;Dashboard1&#47;1_rss.png' style='border: none' />
+    </a>
+  </noscript><object class='tableauViz'  style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+    <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
+    <param name='name' value='Book1_16319580770430&#47;Dashboard1' />
+    <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book1_16319580770430&#47;Dashboard1&#47;1.png' /> 
+    <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
+    <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
+    <param name='display_count' value='yes' /><param name='language' value='en-US' />
+    <param name='filter' value='publish=yes' /></object></div>                
+    <script type='text/javascript'>                    
+      var divElement = document.getElementById('viz1635068703941');                    
+      var vizElement = divElement.getElementsByTagName('object')[0];                    
+      if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';
+      vizElement.style.height=(divElement.offsetWidth*0.6)+'px';} 
+      else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} 
+      else { vizElement.style.width='100%';vizElement.style.height='877px';}                     
+      var scriptElement = document.createElement('script');                    
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+  </script>
+
+  <!-- PART 3 -->
+  <h1 style="padding-left:3em;padding-right:3em; margin-top: 10em; color:#03045E;font-size: 230%;">Year-on-year growth rate of Business establishments in various industries</h1>
+  <div id="part3" style="width: 100%; height:800px;padding-left:3em;padding-right:3em;"></div>
+  <script src="part3.js" type="text/javascript"></script>
+</div>
+
+<div class="footer">
+  <div id="button"></div>
+  <div id="container">
+  <div id="cont">
+  <div class="footer_center">
+	   <h6>Melbourne Industries Explorer&nbsp;&nbsp;&nbsp;Design by: Ziyi Zhang  |  Xuan Zhang  | Jianeng Li  |  Yinhao Deng&nbsp;&nbsp;&nbsp; Oct. 2021</h6>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+
+</html>
