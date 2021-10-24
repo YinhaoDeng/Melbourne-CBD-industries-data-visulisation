@@ -6,6 +6,8 @@ Our target user is the State Government department who need to understand the de
 
 
 [Live Demo](http://iv-asst3.herokuapp.com)
+<br>
+<br>
 ![screenshot](https://github.com/YinhaoDeng/Melbourne-CBD-industries-data-visulisation/blob/main/Melbourne%20Industry%20Visulisation%20Project%20screenshot.png)
 
 
